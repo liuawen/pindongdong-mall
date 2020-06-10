@@ -177,12 +177,13 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-
+<!--selectList  -->
   <select id="selectList" resultMap="BaseResultMap" >
     SELECT
     <include refid="Base_Column_List"/>
     from mmall_product
     ORDER BY id asc
+--    prder by id asc 升序 配置会加上分号 ; limit 10 offset 1
   </select>
 
 
@@ -190,6 +191,7 @@
     SELECT
     <include refid="Base_Column_List"/>
     from mmall_product
+    <!--where -->
     <where>
       <if test="productName != null">
         and name like #{productName}
@@ -199,7 +201,7 @@
       </if>
     </where>
   </select>
-  
+<!--  -->
   <select id="selectByNameAndCategoryIds" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"></include>

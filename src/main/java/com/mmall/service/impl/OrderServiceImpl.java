@@ -55,7 +55,8 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-13
  */
 @Service("iOrderService")
 public class OrderServiceImpl implements IOrderService {
@@ -92,7 +93,7 @@ public class OrderServiceImpl implements IOrderService {
 
 
     public  ServerResponse createOrder(Integer userId,Integer shippingId){
-
+        //从购物车中获取已经勾选的数据
         //从购物车中获取数据
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
 

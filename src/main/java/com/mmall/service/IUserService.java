@@ -4,7 +4,8 @@ import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-05
  */
 public interface IUserService {
 

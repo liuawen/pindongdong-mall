@@ -23,9 +23,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-12
  */
-
 @Controller
 @RequestMapping("/order/")
 public class OrderController {
@@ -39,6 +39,7 @@ public class OrderController {
     @RequestMapping("create.do")
     @ResponseBody
     public ServerResponse create(HttpSession session, Integer shippingId){
+        //登录用户的判定
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());

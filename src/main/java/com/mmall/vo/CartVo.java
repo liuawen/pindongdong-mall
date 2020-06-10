@@ -4,14 +4,16 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-05
+ * CartVo
  */
 public class CartVo {
 
     private List<CartProductVo> cartProductVoList;
     private BigDecimal cartTotalPrice;
     private Boolean allChecked;//是否已经都勾选
-    private String imageHost;
+    private String imageHost;//购物车要显示图片
 
     public List<CartProductVo> getCartProductVoList() {
         return cartProductVoList;

@@ -4,7 +4,10 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-
+/**
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-05
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "transactionManager")
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})

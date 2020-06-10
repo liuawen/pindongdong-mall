@@ -5,7 +5,8 @@ import com.google.common.collect.Sets;
 import java.util.Set;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-02
  */
 public class Const {
 
@@ -22,8 +23,8 @@ public class Const {
         int CHECKED = 1;//即购物车选中状态
         int UN_CHECKED = 0;//购物车中未选中状态
 
-        String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";
-        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";
+        String LIMIT_NUM_FAIL = "LIMIT_NUM_FAIL";//限制失败
+        String LIMIT_NUM_SUCCESS = "LIMIT_NUM_SUCCESS";//限制成功
     }
 
     public interface Role{

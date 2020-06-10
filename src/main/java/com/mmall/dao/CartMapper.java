@@ -17,7 +17,7 @@ public interface CartMapper {
     int updateByPrimaryKeySelective(Cart record);
 
     int updateByPrimaryKey(Cart record);
-
+    //用户id和产品id查到这个购物车 写SQL去
     Cart selectCartByUserIdProductId(@Param("userId") Integer userId, @Param("productId")Integer productId);
 
     List<Cart> selectCartByUserId(Integer userId);

@@ -89,7 +89,8 @@ public class ProductManageController {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
-
+    //list 显示商品信息  分页
+    //@RequestParam()
     @RequestMapping("list.do")
     @ResponseBody
     public ServerResponse getList(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
@@ -105,7 +106,7 @@ public class ProductManageController {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
-
+    //搜索 productName productId
     @RequestMapping("search.do")
     @ResponseBody
     public ServerResponse productSearch(HttpSession session,String productName,Integer productId, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
@@ -121,7 +122,7 @@ public class ProductManageController {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
-
+    //文件上传
     @RequestMapping("upload.do")
     @ResponseBody
     public ServerResponse upload(HttpSession session,@RequestParam(value = "upload_file",required = false) MultipartFile file,HttpServletRequest request){
@@ -143,7 +144,7 @@ public class ProductManageController {
         }
     }
 
-
+    //富文本图片的上传  simditor的
     @RequestMapping("richtext_img_upload.do")
     @ResponseBody
     public Map richtextImgUpload(HttpSession session, @RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response){
@@ -172,6 +173,7 @@ public class ProductManageController {
             resultMap.put("success",true);
             resultMap.put("msg","上传成功");
             resultMap.put("file_path",url);
+            //插件 返回
             response.addHeader("Access-Control-Allow-Headers","X-File-Name");
             return resultMap;
         }else{

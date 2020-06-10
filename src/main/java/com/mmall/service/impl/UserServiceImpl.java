@@ -14,7 +14,8 @@ import org.springframework.util.StringUtils;
 import java.util.UUID;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-05
  */
 @Service("iUserService")
 public class UserServiceImpl implements IUserService {

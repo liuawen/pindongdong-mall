@@ -141,14 +141,14 @@ public class ProductServiceImpl implements IProductService {
     }
 
 
-
+    //获取商品列表  分页 排序
     public ServerResponse<PageInfo> getProductList(int pageNum,int pageSize){
         //startPage--start
         //填充自己的sql查询逻辑
         //pageHelper-收尾
         PageHelper.startPage(pageNum,pageSize);
         List<Product> productList = productMapper.selectList();
-
+        //不用那么详情  只是一个列表 VoList
         List<ProductListVo> productListVoList = Lists.newArrayList();
         for(Product productItem : productList){
             ProductListVo productListVo = assembleProductListVo(productItem);
@@ -158,6 +158,7 @@ public class ProductServiceImpl implements IProductService {
         pageResult.setList(productListVoList);
         return ServerResponse.createBySuccess(pageResult);
     }
+
 
     private ProductListVo assembleProductListVo(Product product){
         ProductListVo productListVo = new ProductListVo();
@@ -173,9 +174,10 @@ public class ProductServiceImpl implements IProductService {
     }
 
 
-
+    //搜索产品
     public ServerResponse<PageInfo> searchProduct(String productName,Integer productId,int pageNum,int pageSize){
         PageHelper.startPage(pageNum,pageSize);
+        //productName 不为空  模糊查询 %productName%
         if(StringUtils.isNotBlank(productName)){
             productName = new StringBuilder().append("%").append(productName).append("%").toString();
         }
@@ -206,7 +208,7 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createBySuccess(productDetailVo);
     }
 
-
+    //keyword  查询什么
     public ServerResponse<PageInfo> getProductByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy){
         if(StringUtils.isBlank(keyword) && categoryId == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());

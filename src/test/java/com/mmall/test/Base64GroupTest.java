@@ -6,7 +6,8 @@ import sun.misc.BASE64Encoder;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-05
  */
 public class Base64GroupTest {
     // 加密

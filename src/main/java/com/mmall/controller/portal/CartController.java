@@ -14,7 +14,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-05
+ * 购物车模块
+ *
+ * 查询商品数
+ * 购物车列表
+ * 加入商品
+ * 更新商品数
+ * 移除商品
+ * 单选/取消
+ * 全选/取消
  */
 @Controller
 @RequestMapping("/cart/")
@@ -24,7 +34,7 @@ public class CartController {
     private ICartService iCartService;
 
 
-
+    //list
     @RequestMapping("list.do")
     @ResponseBody
     public ServerResponse<CartVo> list(HttpSession session){
@@ -34,11 +44,12 @@ public class CartController {
         }
         return iCartService.list(user.getId());
     }
-
+    //添加
     @RequestMapping("add.do")
     @ResponseBody
-    public ServerResponse<CartVo> add(HttpSession session, Integer count, Integer productId){
+    public ServerResponse<CartVo> add(HttpSession session, Integer count, Integer productId){//session，数量，产品id
         User user = (User)session.getAttribute(Const.CURRENT_USER);
+        //user null 需要强制登录的
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
@@ -46,7 +57,7 @@ public class CartController {
     }
 
 
-
+    //更新购物车
     @RequestMapping("update.do")
     @ResponseBody
     public ServerResponse<CartVo> update(HttpSession session, Integer count, Integer productId){
@@ -56,7 +67,7 @@ public class CartController {
         }
         return iCartService.update(user.getId(),productId,count);
     }
-
+    //可以删除多个产品  productIds
     @RequestMapping("delete_product.do")
     @ResponseBody
     public ServerResponse<CartVo> deleteProduct(HttpSession session,String productIds){
@@ -67,7 +78,7 @@ public class CartController {
         return iCartService.deleteProduct(user.getId(),productIds);
     }
 
-
+    //全选
     @RequestMapping("select_all.do")
     @ResponseBody
     public ServerResponse<CartVo> selectAll(HttpSession session){
@@ -77,7 +88,7 @@ public class CartController {
         }
         return iCartService.selectOrUnSelect(user.getId(),null,Const.Cart.CHECKED);
     }
-
+    //全反选
     @RequestMapping("un_select_all.do")
     @ResponseBody
     public ServerResponse<CartVo> unSelectAll(HttpSession session){
@@ -89,7 +100,7 @@ public class CartController {
     }
 
 
-
+    //单独选
     @RequestMapping("select.do")
     @ResponseBody
     public ServerResponse<CartVo> select(HttpSession session,Integer productId){
@@ -99,7 +110,7 @@ public class CartController {
         }
         return iCartService.selectOrUnSelect(user.getId(),productId,Const.Cart.CHECKED);
     }
-
+    //单独
     @RequestMapping("un_select.do")
     @ResponseBody
     public ServerResponse<CartVo> unSelect(HttpSession session,Integer productId){
@@ -111,7 +122,7 @@ public class CartController {
     }
 
 
-
+    //获得产品数量
     @RequestMapping("get_cart_product_count.do")
     @ResponseBody
     public ServerResponse<Integer> getCartProductCount(HttpSession session){

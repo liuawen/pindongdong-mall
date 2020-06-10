@@ -10,7 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by geely
+ * @author : Liu Awen Email:willowawen@gmail.com
+ * @create : 2019-08-07
  */
 public class FTPUtil {
 
@@ -20,12 +21,20 @@ public class FTPUtil {
     private static String ftpUser = PropertiesUtil.getProperty("ftp.user");
     private static String ftpPass = PropertiesUtil.getProperty("ftp.pass");
 
+    private String ip;
+    private int port;
+    private String user;
+    private String pwd;
+    private FTPClient ftpClient;
+
+    //构造
     public FTPUtil(String ip,int port,String user,String pwd){
         this.ip = ip;
         this.port = port;
         this.user = user;
         this.pwd = pwd;
     }
+    //uploadFile
     public static boolean uploadFile(List<File> fileList) throws IOException {
         FTPUtil ftpUtil = new FTPUtil(ftpIp,21,ftpUser,ftpPass);
         logger.info("开始连接ftp服务器");
@@ -36,16 +45,21 @@ public class FTPUtil {
 
 
     private boolean uploadFile(String remotePath,List<File> fileList) throws IOException {
+        //uploaded 默认传了
         boolean uploaded = true;
         FileInputStream fis = null;
         //连接FTP服务器
         if(connectServer(this.ip,this.port,this.user,this.pwd)){
             try {
+                //一些列的操作
                 ftpClient.changeWorkingDirectory(remotePath);
                 ftpClient.setBufferSize(1024);
                 ftpClient.setControlEncoding("UTF-8");
+                //二进制文件类型  binary file type
                 ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+
                 ftpClient.enterLocalPassiveMode();
+                //传了
                 for(File fileItem : fileList){
                     fis = new FileInputStream(fileItem);
                     ftpClient.storeFile(fileItem.getName(),fis);
@@ -56,6 +70,7 @@ public class FTPUtil {
                 uploaded = false;
                 e.printStackTrace();
             } finally {
+                //释放
                 fis.close();
                 ftpClient.disconnect();
             }
@@ -64,7 +79,7 @@ public class FTPUtil {
     }
 
 
-
+    //连接
     private boolean connectServer(String ip,int port,String user,String pwd){
 
         boolean isSuccess = false;
@@ -88,11 +103,7 @@ public class FTPUtil {
 
 
 
-    private String ip;
-    private int port;
-    private String user;
-    private String pwd;
-    private FTPClient ftpClient;
+
 
     public String getIp() {
         return ip;
